@@ -1,0 +1,77 @@
+Audio Extractor — componenti di terze parti / Third-party components
+=====================================================================
+
+Audio Extractor è distribuito con licenza MIT (vedi LICENSE.txt).
+Il programma include i seguenti componenti, ciascuno con la propria licenza.
+Audio Extractor is MIT-licensed (see LICENSE.txt). It bundles the following
+components, each under its own license.
+
+
+1) FFmpeg  —  ffmpeg.exe
+-------------------------------------------------------------------------------
+Versione / Version: 2025-10-09-git-469aad3897 (essentials build, www.gyan.dev)
+Licenza / License:  GNU General Public License v3 (GPL-3.0) — vedi GPL-3.0.txt
+                    Build configurata con --enable-gpl --enable-version3
+                    (nessun componente "nonfree").
+Sito / Website:     https://ffmpeg.org
+
+ffmpeg.exe è un programma separato, eseguito da Audio Extractor come processo
+esterno. È distribuito senza modifiche, così come pubblicato da gyan.dev.
+ffmpeg.exe is a separate program, run by Audio Extractor as an external
+process, redistributed unmodified as published by gyan.dev.
+
+Codice sorgente corrispondente / Corresponding source code:
+  - FFmpeg (commit 469aad3897):
+      https://github.com/FFmpeg/FFmpeg/tree/469aad3897
+  - Configurazione e librerie della build / build configuration and libraries:
+      https://www.gyan.dev/ffmpeg/builds/
+  Su richiesta, l'autore di Audio Extractor fornisce una copia del codice
+  sorgente corrispondente per almeno tre anni dalla distribuzione.
+  On request, the author of Audio Extractor will provide a copy of the
+  corresponding source code for at least three years after distribution.
+
+FFmpeg include a sua volta librerie come libmp3lame (LGPL), libopus (BSD),
+libvorbis (BSD), libx264 (GPL) e altre: i rispettivi avvisi sono riportati
+nella documentazione di FFmpeg e della build gyan.dev.
+
+
+2) Qt 6 / PySide6 / Shiboken6  —  Qt6*.dll, PySide6, shiboken6
+-------------------------------------------------------------------------------
+Versione / Version: 6.12.0
+Licenza / License:  GNU Lesser General Public License v3 (LGPL-3.0)
+                    — vedi LGPL-3.0.txt e GPL-3.0.txt
+Sito / Website:     https://www.qt.io  ·  https://doc.qt.io/qtforpython/
+Sorgenti / Source:  https://code.qt.io/cgit/qt/  ·  https://code.qt.io/cgit/pyside/pyside-setup.git/
+
+Le librerie Qt sono collegate dinamicamente e installate come file .dll
+separati (cartella "_internal\PySide6"): possono essere sostituite con altre
+versioni compatibili, come previsto dalla LGPL v3. Il codice sorgente completo
+di Audio Extractor e lo script di build sono inoltre nella cartella "source".
+Qt libraries are dynamically linked and installed as separate .dll files
+("_internal\PySide6" folder), so they can be replaced with compatible versions
+as the LGPL v3 requires. The complete source code of Audio Extractor and its
+build script are also included in the "source" folder.
+
+
+3) Python  —  python313.dll e libreria standard
+-------------------------------------------------------------------------------
+Versione / Version: 3.13
+Licenza / License:  Python Software Foundation License — vedi Python-LICENSE.txt
+Sito / Website:     https://www.python.org
+
+
+4) PyInstaller bootloader
+-------------------------------------------------------------------------------
+Licenza / License:  GPL-2.0 con eccezione per il bootloader, che consente di
+                    distribuire i programmi creati con qualsiasi licenza.
+                    GPL-2.0 with a bootloader exception that allows the
+                    resulting programs to be distributed under any license.
+Sito / Website:     https://pyinstaller.org
+
+
+5) Microsoft Visual C++ Runtime  —  vcruntime140*.dll, msvcp140*.dll, ucrtbase.dll
+-------------------------------------------------------------------------------
+File ridistribuibili forniti da Microsoft insieme a Python e Qt, distribuiti
+secondo le condizioni di ridistribuzione di Microsoft Visual Studio.
+Redistributable files provided by Microsoft with Python and Qt, distributed
+under the Microsoft Visual Studio redistribution terms.
