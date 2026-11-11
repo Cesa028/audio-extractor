@@ -2,7 +2,7 @@
 ; Non compilare a mano: lo fa build.py, che passa la versione con /DAppVersion=...
 
 #ifndef AppVersion
-  #define AppVersion "2.0"
+  #define AppVersion "2.2.0"
 #endif
 #define AppName "Audio Extractor"
 #define AppExe "AudioExtractor.exe"
@@ -60,6 +60,10 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 [Registry]
 ; alla disinstallazione rimuove anche le impostazioni salvate dal programma
 Root: HKCU; Subkey: "Software\AudioExtractor"; Flags: uninsdeletekey dontcreatekey
+
+[UninstallDelete]
+; alla disinstallazione rimuove anche il log del programma
+Type: filesandordirs; Name: "{userappdata}\AudioExtractor"
 
 [Run]
 Filename: "{app}\{#AppExe}"; Description: "{cm:LaunchProgram,{#AppName}}"; Flags: nowait postinstall skipifsilent

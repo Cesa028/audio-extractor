@@ -21,7 +21,9 @@ from PySide6.QtCore import QBuffer, QByteArray, Qt  # noqa: E402
 from PySide6.QtGui import QGuiApplication, QImage, QPainter  # noqa: E402
 from PySide6.QtSvg import QSvgRenderer  # noqa: E402
 
-import audio_extractor as ae  # noqa: E402
+import common  # noqa: E402
+import engine  # noqa: E402
+import icons  # noqa: E402
 
 BUILD = HERE / "build"
 DIST = HERE / "dist"
@@ -35,7 +37,7 @@ def make_icon(path: Path):
         img.fill(Qt.transparent)
         p = QPainter(img)
         p.setRenderHint(QPainter.Antialiasing)
-        QSvgRenderer(QByteArray(ae.ICON_SVG.encode())).render(p)
+        QSvgRenderer(QByteArray(icons.ICON_SVG.encode())).render(p)
         p.end()
         buf = QByteArray()
         b = QBuffer(buf)
@@ -52,7 +54,7 @@ def make_icon(path: Path):
 
 
 def make_version_file(path: Path):
-    v = [int(x) for x in ae.APP_VERSION.split(".")] + [0, 0, 0]
+    v = [int(x) for x in common.APP_VERSION.split(".")] + [0, 0, 0]
     v = tuple(v[:4])
     path.write_text(f"""VSVersionInfo(
   ffi=FixedFileInfo(filevers={v}, prodvers={v}, mask=0x3f, flags=0x0, OS=0x40004,
@@ -61,12 +63,12 @@ def make_version_file(path: Path):
     StringFileInfo([StringTable('041004B0', [
       StringStruct('CompanyName', 'Cesa028'),
       StringStruct('FileDescription', 'Audio Extractor'),
-      StringStruct('FileVersion', '{ae.APP_VERSION}'),
+      StringStruct('FileVersion', '{common.APP_VERSION}'),
       StringStruct('InternalName', 'AudioExtractor'),
       StringStruct('LegalCopyright', '© 2026 Cesa028 — MIT License'),
       StringStruct('OriginalFilename', 'AudioExtractor.exe'),
       StringStruct('ProductName', 'Audio Extractor'),
-      StringStruct('ProductVersion', '{ae.APP_VERSION}')])]),
+      StringStruct('ProductVersion', '{common.APP_VERSION}')])]),
     VarFileInfo([VarStruct('Translation', [0x0410, 1200])])
   ]
 )
@@ -97,7 +99,7 @@ def pyinstaller(onefile: bool, ffmpeg: str, ico: Path, ver: Path):
 
 def main():
     portable = "--portable" in sys.argv
-    ffmpeg = ae.find_ffmpeg()
+    ffmpeg = engine.find_ffmpeg()
     if not ffmpeg:
         sys.exit("ffmpeg non trovato")
     BUILD.mkdir(exist_ok=True)
@@ -125,14 +127,22 @@ def main():
     # sorgente dell'app: permette di ricompilarla con un'altra versione di Qt (LGPL v3, sez. 4)
     src = pkg / "source"
     (src / "installer").mkdir(parents=True)
-    for name in ("audio_extractor.py", "build.py", "LICENSE.txt"):
+    # TUTTI i moduli .py del progetto (audio_extractor, common, theme, icons, engine, widgets, dialogs, ui, build)
+    modules = sorted(HERE.glob("*.py"))
+    required = {"audio_extractor", "common", "theme", "icons", "engine", "widgets", "dialogs", "ui", "build"}
+    missing = required - {m.stem for m in modules}
+    if missing:
+        sys.exit(f"Moduli mancanti: {sorted(missing)}")
+    for m in modules:
+        shutil.copy2(m, src / m.name)
+    for name in ("Audio Extractor.pyw", "LICENSE.txt", "README.md"):
         shutil.copy2(HERE / name, src / name)
     for p in (HERE / "installer").iterdir():
         shutil.copy2(p, src / "installer" / p.name)
     shutil.copytree(HERE / "licenses", src / "licenses")
-    subprocess.run([iscc, f"/DAppVersion={ae.APP_VERSION}", f"/DSrcDir={pkg}", "/Qp",
+    subprocess.run([iscc, f"/DAppVersion={common.APP_VERSION}", f"/DSrcDir={pkg}", "/Qp",
                     str(HERE / "installer" / "AudioExtractor.iss")], check=True)
-    setup = DIST / f"AudioExtractor-Setup-{ae.APP_VERSION}.exe"
+    setup = DIST / f"AudioExtractor-Setup-{common.APP_VERSION}.exe"
     print(f"\nFatto: {setup}  ({setup.stat().st_size / 1_048_576:.0f} MB)")
 
 

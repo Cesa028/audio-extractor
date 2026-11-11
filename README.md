@@ -2,7 +2,7 @@
 
 **Estrai l'audio dai tuoi video in pochi clic, con la copertina già incorporata.**
 
-Audio Extractor è un'applicazione per Windows 10/11 (64 bit) con interfaccia moderna e scura. Trascini i video nella coda, scegli formato e qualità e ottieni file audio pronti da ascoltare, con una copertina ricavata dal fotogramma del video (o da un'immagine a tua scelta). Il lavoro di conversione è affidato a [FFmpeg](https://ffmpeg.org), incluso nell'installer.
+Audio Extractor è un'applicazione per Windows 10/11 (64 bit) con interfaccia moderna, tema chiaro e scuro (segue quello di Windows). Trascini i video nella coda, scegli formato e qualità e ottieni file audio pronti da ascoltare, con una copertina ricavata dal fotogramma del video (o da un'immagine a tua scelta). Il lavoro di conversione è affidato a [FFmpeg](https://ffmpeg.org), incluso nell'installer.
 
 ![Licenza MIT](https://img.shields.io/badge/licenza-MIT-green) ![Piattaforma](https://img.shields.io/badge/piattaforma-Windows%2010%2F11-blue) ![Python](https://img.shields.io/badge/Python-3.10%2B-yellow)
 
@@ -24,7 +24,7 @@ Audio Extractor è un'applicazione per Windows 10/11 (64 bit) con interfaccia mo
 
 ## Download
 
-L'installer per Windows è disponibile nella sezione **[Releases](../../releases/latest)**: scarica `AudioExtractor-Setup-2.1.exe` ed eseguilo. L'installazione non richiede i diritti di amministratore (è comunque possibile installare per tutti gli utenti) e include già FFmpeg: non serve installare altro.
+L'installer per Windows è disponibile nella sezione **[Releases](../../releases/latest)**: scarica `AudioExtractor-Setup-2.2.0.exe` ed eseguilo. L'installazione non richiede i diritti di amministratore (è comunque possibile installare per tutti gli utenti) e include già FFmpeg: non serve installare altro.
 
 ## Funzionalità
 
@@ -38,7 +38,9 @@ L'installer per Windows è disponibile nella sezione **[Releases](../../releases
   - ritaglio personalizzabile con anteprima, anche in forma quadrata;
   - possibilità di applicare la stessa immagine a tutti i video in coda o di personalizzare la copertina di un singolo video.
 - **Miniature** dei video nella coda, con avanzamento per ogni file.
-- **Interfaccia scura** moderna, pensata per essere chiara e veloce da usare.
+- **Tema chiaro e scuro**: di default segue Windows, si cambia dal vivo con il pulsante nell'intestazione e la scelta viene ricordata (contrasto dei testi verificato in entrambi i temi).
+- **Tastiera e accessibilità**: tutto raggiungibile con Tab, focus sempre visibile, nomi accessibili per i lettori di schermo, scorciatoie (vedi sotto).
+- **Finestra che ricorda** posizione e dimensione, sezioni del pannello comprimibili, messaggi non invasivi e errori in italiano con dettagli copiabili (log in `%APPDATA%\AudioExtractor`).
 
 ## Formati supportati
 
@@ -62,6 +64,19 @@ L'installer per Windows è disponibile nella sezione **[Releases](../../releases
 2. Scegli il **formato** di uscita e, nel pannello delle impostazioni, bitrate o qualità, frequenza di campionamento e canali.
 3. Nella sezione **Copertina** decidi se incorporarla, da quale fotogramma ricavarla o se usare un'immagine tua.
 4. Avvia la conversione: i file audio vengono creati e puoi seguirne l'avanzamento nella coda.
+
+## Scorciatoie
+
+| Tasti | Azione |
+|---|---|
+| `Ctrl+O` | Aggiungi video |
+| `Ctrl+Maiusc+O` | Aggiungi cartella |
+| `Ctrl+Invio` | Estrai audio |
+| `Esc` | Annulla l'estrazione in corso |
+| `Canc` | Rimuovi dalla coda i video selezionati |
+| `Ctrl+Z` | Annulla l'ultima rimozione dalla coda |
+| `F1` | Informazioni, licenza e componenti di terze parti |
+| Frecce | Cambiano formato / segmento selezionato; nell'anteprima spostano l'inquadratura (`+` `-` zoom, `Home` centra) |
 
 ## Eseguire dal codice sorgente
 
@@ -90,8 +105,15 @@ Lo script genera l'icona, compila l'applicazione con PyInstaller, include FFmpeg
 
 ```
 AudioExtractor/
-├─ audio_extractor.py      applicazione completa (interfaccia, coda, conversione, copertine)
+├─ audio_extractor.py      punto di ingresso (avvio, tema, gestione errori)
 ├─ Audio Extractor.pyw     avvio senza console
+├─ common.py               costanti, percorsi, log, utilità
+├─ theme.py                design token, palette scura/chiara, foglio di stile
+├─ icons.py                icone SVG tematizzate e icona dell'app
+├─ engine.py               formati, ffmpeg, analisi dei file, copertine, comandi
+├─ widgets.py              componenti dell'interfaccia (tile, toggle, anteprima, righe coda…)
+├─ dialogs.py              Informazioni, visualizzatore licenze, dettaglio errori
+├─ ui.py                   finestra principale (coda, estrazione, scorciatoie)
 ├─ build.py                build dell'eseguibile e dell'installer
 ├─ installer/              script Inno Setup e pagina della licenza
 ├─ licenses/               testi delle licenze dei componenti di terze parti
