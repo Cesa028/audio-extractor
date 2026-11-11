@@ -185,6 +185,7 @@ QComboBox, QLineEdit {{ background: {P.field}; border: 1px solid {P.border_hover
 QComboBox:hover, QLineEdit:hover {{ border-color: {P.border_strong}; }}
 QComboBox:focus, QLineEdit:focus {{ border: 2px solid {P.focus}; padding: 5px 9px; }}
 QComboBox:disabled, QLineEdit:disabled {{ color: {P.dim}; background: {P.surf}; border-color: {P.border}; }}
+QComboBox {{ combobox-popup: 0; }}
 QComboBox::drop-down {{ border: none; width: 26px; }}
 QComboBox::down-arrow {{ image: url({asset_dir}/chev-{P.name}.svg); width: 12px; height: 12px; }}
 QComboBox QAbstractItemView {{ background: {P.field}; border: 1px solid {P.border_hover}; padding: 4px; outline: 0;

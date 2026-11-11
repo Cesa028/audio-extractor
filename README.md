@@ -24,7 +24,7 @@ Audio Extractor è un'applicazione per Windows 10/11 (64 bit) con interfaccia mo
 
 ## Download
 
-L'installer per Windows è disponibile nella sezione **[Releases](../../releases/latest)**: scarica `AudioExtractor-Setup-2.2.0.exe` ed eseguilo. L'installazione non richiede i diritti di amministratore (è comunque possibile installare per tutti gli utenti) e include già FFmpeg: non serve installare altro.
+L'installer per Windows è disponibile nella sezione **[Releases](../../releases/latest)**: scarica `AudioExtractor-Setup-2.2.1.exe` ed eseguilo. L'installazione non richiede i diritti di amministratore (è comunque possibile installare per tutti gli utenti) e include già FFmpeg: non serve installare altro.
 
 ## Funzionalità
 
@@ -51,9 +51,9 @@ L'installer per Windows è disponibile nella sezione **[Releases](../../releases
 | Opus | Lossy | `.opus` | Ottimo rapporto qualità/peso, lavora a 48 kHz |
 | Vorbis | Lossy | `.ogg` | Formato aperto, diffuso nei videogiochi |
 | AC3 | Lossy | `.ac3` | Dolby Digital, mantiene il 5.1 (senza copertina) |
-| FLAC | Lossless | `.flac` | Compressione senza perdita |
-| WAV | Lossless | `.wav` | PCM non compresso |
-| ALAC | Lossless | `.m4a` | Apple Lossless |
+| FLAC | Lossless | `.flac` | Compressione senza perdita (16 o 24 bit) |
+| WAV | Lossless | `.wav` | PCM non compresso (16, 24, 32 bit PCM o 32 bit float) |
+| ALAC | Lossless | `.m4a` | Apple Lossless (16 o 24 bit) |
 | Copia diretta | — | varia | Estrae la traccia senza ricodificarla |
 
 **Video in ingresso:** MP4, MKV, MOV, AVI, WebM, FLV, WMV, M4V, MPG/MPEG, TS, M2TS, MTS, 3GP, OGV, VOB, MXF, DIVX, ASF.

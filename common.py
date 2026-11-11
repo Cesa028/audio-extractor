@@ -11,7 +11,7 @@ from pathlib import Path
 from PySide6.QtCore import QSettings
 
 APP_NAME = "Audio Extractor"
-APP_VERSION = "2.2.0"
+APP_VERSION = "2.2.1"
 APP_AUTHOR = "Cesa028"
 APP_URL = "https://github.com/Cesa028/audio-extractor"
 FROZEN = bool(getattr(sys, "frozen", False))

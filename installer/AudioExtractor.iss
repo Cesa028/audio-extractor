@@ -2,7 +2,7 @@
 ; Non compilare a mano: lo fa build.py, che passa la versione con /DAppVersion=...
 
 #ifndef AppVersion
-  #define AppVersion "2.2.0"
+  #define AppVersion "2.2.1"
 #endif
 #define AppName "Audio Extractor"
 #define AppExe "AudioExtractor.exe"

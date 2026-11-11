@@ -686,7 +686,7 @@ class MainWindow(QMainWindow):
         elif f.key == "copy":
             est = "≈ come la sorgente"
         elif f.key == "wav":
-            depth = (16, 24, 32)[min(self.cb_quality.currentIndex(), 2)]
+            depth = (16, 24, 32, 32)[min(self.cb_quality.currentIndex(), 3)]
             rate = self.cb_rate.currentData() or 48000
             ch = self.cb_channels.currentData() or 2
             est = f"≈ {fmt_size(total * rate * depth * ch / 8 / 1_048_576)}"

@@ -86,9 +86,10 @@ FORMATS: list[Format] = [
         Mode("—", "Profondità bit", [
             Quality("16 bit PCM", ["-c:a", "pcm_s16le"]),
             Quality("24 bit PCM", ["-c:a", "pcm_s24le"]),
+            Quality("32 bit PCM", ["-c:a", "pcm_s32le"]),
             Quality("32 bit float", ["-c:a", "pcm_f32le"]),
         ]),
-    ], rates=[44100, 48000, 88200, 96000, 192000], note="Audio grezzo per l'editing. Non supporta copertine."),
+    ], rates=[44100, 48000, 88200, 96000, 192000], note="Audio grezzo per l'editing, fino a 32 bit. Non supporta copertine."),
     Format("alac", "ALAC", "Lossless · Apple", "m4a", ["-c:a", "alac"], [
         Mode("—", "Profondità bit", [
             Quality("16 bit", ["-sample_fmt", "s16p"]),
